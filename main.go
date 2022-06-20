@@ -46,7 +46,6 @@ func main() {
 	sugar.Info(fmt.Printf("target url: %+v\n", targetUrl.String()))
 
 	// sleep until reserve time
-
 	sugar.Info("sleep until: %v", reserveTime)
 	sleep(reserveTime)
 
