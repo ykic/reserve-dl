@@ -36,28 +36,30 @@ func main() {
 		sugar.Error(err)
 		return
 	}
-	fmt.Printf("reserve time: %+v\n", reserveTime)
+	sugar.Info(fmt.Printf("reserve time: %+v\n", reserveTime))
 
 	targetUrl, err := url.Parse(args[1])
 	if err != nil {
 		sugar.Error(err)
 		return
 	}
-	fmt.Printf("target url: %+v\n", targetUrl.String())
+	sugar.Info(fmt.Printf("target url: %+v\n", targetUrl.String()))
 
 	// sleep until reserve time
+
+	sugar.Info("sleep until: %v", reserveTime)
 	sleep(reserveTime)
 
 	// try download
 	cmd := youtubeDL(targetUrl.String())
 	err = retry.Do(func() error {
-		fmt.Printf("try at: %+v\n", time.Now())
+		sugar.Info(fmt.Sprintf("try at: %+v\n", time.Now()))
 		result, err := cmd.Output()
 		if err != nil {
 			sugar.Error(err)
 			return err
 		}
-		fmt.Printf("youtube-dl result: %s\n", result)
+		sugar.Info(fmt.Printf("youtube-dl result: %s\n", result))
 		return nil
 	},
 		retry.Delay(RETRY_DELAY),
@@ -83,6 +85,5 @@ func parseTime(ts string) (time.Time, error) {
 }
 
 func youtubeDL(url string) *exec.Cmd {
-	fmt.Printf("url: %s\n", url)
 	return exec.Command("youtube-dl", url)
 }
