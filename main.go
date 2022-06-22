@@ -27,7 +27,7 @@ func main() {
 	args := flag.Args()
 
 	if len(args) < 2 {
-		sugar.Info("usage: $reserve-dl \"2022-01-01 12:00\" \"https://www.youtube.com/user/dommune/live\"\n")
+		fmt.Println("usage: $reserve-dl \"2022-01-01 12:00\" \"https://www.youtube.com/user/dommune/live\"")
 		return
 	}
 
